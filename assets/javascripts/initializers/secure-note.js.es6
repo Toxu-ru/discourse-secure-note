@@ -9,16 +9,6 @@ export default {
   initialize() {
     withPluginApi('0.1', api => {
 
-      // Function we can call in the console to play around before building the UD
-      window.updateSecureNote = function( post_id, raw ) {
-        ajax("/secure-note/update", {
-                type: "PUT",
-                data: { post_id, raw }
-              }).then(( response) => {
-                console.log( response)
-              }).catch( error => console.warn(error) );
-      }
-
       /**
        * Add "Secure Note" button to post menu
        */
@@ -53,22 +43,12 @@ export default {
       });
 
       /**
-       * Send Secure Note button clicks to a Topic Controller action.
+       * Send Secure Note button clicks to our controller
        */
 
       api.reopenWidget('post-menu', {
         secureNoteOpenModal() {
           this.register.lookup('controller:secure-note').send('openModal', this.attrs);
-        }
-      });
-
-
-      const TopicController = api.container.lookupFactory('controller:topic');
-      TopicController.reopen({
-        actions: {
-          secureNoteOpenModal(attrs) {
-            showModal("topic", attrs);
-          }
         }
       });
 
