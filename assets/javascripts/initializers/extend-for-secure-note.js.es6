@@ -27,6 +27,10 @@ export default {
 
         let user = api.getCurrentUser();
 
+        if ( ! user ) {
+          return;
+        }
+
         if ( attrs.user_id === user.id) {
           return {
             action: 'secureNoteOpenModal',
