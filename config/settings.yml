@@ -1,0 +1,10 @@
+plugins:
+  secure_note_enabled:
+    default: true
+    client: true
+  secure_note_post_button_placement:
+    default: 'last'
+    client: true
+  secure_note_post_button_icon:
+    default: 'key'
+    client: true

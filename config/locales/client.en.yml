@@ -1,0 +1,16 @@
+en:
+  js:
+    secure_note:
+      post:
+        title: 'Secure Note'
+        button_title: 'Secure Note'
+      modal:
+        title: 'Secure Note'
+        save_button_title: 'Save Secure Note'
+        saving_button_title: 'Saving&hellip;'
+        textarea_label: 'Enter a secure note below. Making this field empty will remove the note.'
+      disclaimer:
+        template: 'This information is only visible to {{allowed}}'
+        is_op: 'you and our staff.'
+        is_staff: 'the original poster and staff.'
+        is_staff_and_op: 'you and other staff.'

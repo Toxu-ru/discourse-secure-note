@@ -1,0 +1,13 @@
+{{#d-modal-body title="secure_note.modal.title" class="secure-note-modal"}}
+  <form class="form-horizontal">
+    <div class="input-group">
+      <label>{{i18n 'secure_note.modal.textarea_label'}}</label>
+      {{textarea value=rawNote}}
+      <label class="secure-note-modal-disclaimer">{{disclaimer}}</label>
+    </div>
+  </form>
+{{/d-modal-body}}
+
+<div class="modal-footer secure-note-modal-footer">
+  {{d-button action="saveSecureNote" icon="save" class='btn-primary' label=saveButtonLabel disabled=disableSave}}
+</div>
