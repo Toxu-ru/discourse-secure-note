@@ -9,6 +9,8 @@ export default {
   initialize() {
     withPluginApi('0.1', api => {
 
+      const siteSettings = api.container.lookup('site-settings:main');
+
       /**
        * Add "Secure Note" button to post menu
        */
@@ -65,33 +67,68 @@ export default {
           return;
         }
 
-        function displaySecureNote( cooked, footerMessage ) {
+        function displaySecureNote( cooked, disclaimer ) {
+
+          let footerMessage = I18n.t('secure_note.disclaimer.template', {
+            allowed: I18n.t(`secure_note.disclaimer.${disclaimer}`)
+          } );
+
           return api.h('div.cooked.secure-note', [
             api.h('div.secure-note-header', api.h('span', { innerHTML: I18n.t('secure_note.post.title') } ) ),
             api.h('div.secure-note-contents', { innerHTML: cooked } ),
             api.h('div.secure-note-footer', api.h('span', { innerHTML: footerMessage } ) ),
           ]);
+
         }
 
-        function getFooterMessage( attrs, user ) {
+        function getDisclaimerWithTopicOwner( attrs, user ) {
 
-          let footerMessage = 'secure_note.disclaimer.is_op';
+          let disclaimer = 'is_op_with_topic_owner';
+          let userIsPostOwner = attrs.user_id == user.id;
+          let userIsTopicOwner = attrs.topicCreatedById == user.id;
+
+          if ( userIsTopicOwner ) {
+            disclaimer = 'is_op';
+          }
 
           if ( user.staff ) {
 
-            footerMessage = 'secure_note.disclaimer.is_staff_and_op';
+            disclaimer = 'is_staff_with_topic_owner';
 
-            if ( attrs.user_id != user.id ) {
-              footerMessage = 'secure_note.disclaimer.is_staff';
+            if ( userIsPostOwner ) {
+              disclaimer = 'is_staff_and_op_with_topic_owner';
+            }
+
+            if ( userIsTopicOwner ) {
+              disclaimer = 'is_staff_and_op';
+            }
+          }
+
+          return disclaimer;
+        }
+
+        function getDisclaimer( attrs, user ) {
+
+          let disclaimer = 'is_op';
+
+          let userIsPostOwner = attrs.user_id == user.id;
+
+          if ( user.staff ) {
+
+            disclaimer = 'is_staff_and_op';
+
+            if ( ! userIsPostOwner ) {
+              disclaimer = 'secure_note.disclaimer.is_staff';
             }
 
           }
 
-          return I18n.t('secure_note.disclaimer.template', { allowed: I18n.t(footerMessage) });
+          return disclaimer;
 
         }
 
-        return displaySecureNote( attrs.secure_note.cooked, getFooterMessage( attrs, api.getCurrentUser() ) );
+        let disclaimerHandler = siteSettings.secure_note_include_topic_owner ? getDisclaimerWithTopicOwner : getDisclaimer;
+        return displaySecureNote( attrs.secure_note.cooked, disclaimerHandler( attrs, api.getCurrentUser() ) );
 
       });
 

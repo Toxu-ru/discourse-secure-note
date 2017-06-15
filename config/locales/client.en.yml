@@ -14,3 +14,6 @@ en:
         is_op: 'you and our staff.'
         is_staff: 'the original poster and staff.'
         is_staff_and_op: 'you and other staff.'
+        is_op_with_topic_owner: 'you, our staff, and the topic owner.'
+        is_staff_with_topic_owner: 'the original poster, the topic owner, and staff.'
+        is_staff_and_op_with_topic_owner: 'you, the topic owner, and other staff.'

@@ -8,3 +8,6 @@ plugins:
   secure_note_post_button_icon:
     default: 'key'
     client: true
+  secure_note_include_topic_owner:
+    default: true
+    client: true

@@ -74,6 +74,7 @@ after_initialize do
   add_to_serializer(:post, :include_secure_note?) do
     return unless post_custom_fields.present?
     return unless post_custom_fields[DiscourseSecureNote::NOTE_CUSTOM_FIELD].present?
+    return true if SiteSetting.secure_note_include_topic_owner? && @object.topic.user_id == scope.user.id
     scope.user.id == user_id || scope.user.moderator || scope.user.admin
   end
 
