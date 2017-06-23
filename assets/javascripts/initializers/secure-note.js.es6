@@ -23,15 +23,17 @@ export default {
           return;
         }
 
-        if ( attrs.user_id === user.id) {
-          return {
-            action: 'secureNoteOpenModal',
-            icon: siteSettings.secure_note_post_button_icon || 'key',
-            className: 'secure-note create fade-out',
-            title: 'secure_note.post.button_title',
-            label: 'secure_note.post.button_title',
-            position: siteSettings.secure_note_post_button_placement || 'last'
-          };
+        if ( attrs.user_id === user.id ) {
+          if ( ! siteSettings.secure_note_topic_owner_only || user.id === attrs.topicCreatedById ) {
+            return {
+              action: 'secureNoteOpenModal',
+              icon: siteSettings.secure_note_post_button_icon || 'key',
+              className: 'secure-note create fade-out',
+              title: 'secure_note.post.button_title',
+              label: 'secure_note.post.button_title',
+              position: siteSettings.secure_note_post_button_placement || 'last'
+            };
+          }
         } else if ( user.staff ) {
           return {
             action: 'secureNoteOpenModal',
