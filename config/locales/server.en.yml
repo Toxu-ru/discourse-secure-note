@@ -5,3 +5,4 @@ en:
     secure_note_post_button_icon: "Customize the font awesome icon used for the post button icon"
     secure_note_include_topic_owner: "Allow the topic owner to view any secure notes attached to replies in their topic."
     secure_note_topic_owner_only: "Prevent users from seeing \"Secure Note\" on topics they don't own."
+    secure_note_updated_tag: "Specify a tag that should be added to the thread if non staff add a note (unhandled compatibility)."

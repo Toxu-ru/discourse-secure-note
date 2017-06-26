@@ -44,6 +44,23 @@ after_initialize do
         cooked: PrettyText.cook(raw)
       }
 
+      if ( ! current_user.staff? && "" != SiteSetting.secure_note_updated_tag)
+        topic = post.topic
+        tag = Tag.find_by(name: SiteSetting.secure_note_updated_tag)
+        unless tag
+          tag = Tag.create!(name: SiteSetting.secure_note_updated_tag)
+        end
+
+        unless topic.tags.pluck(:id).include?(tag.id)
+          topic.tags << tag
+          topic.save
+          post.publish_change_to_clients!(:revised, reload_topic: true)
+        end
+
+      end
+
+      # TODO: Can we publish the secure note change when it's saved to avoid full refresh for staff viewing the thread?
+
       post.custom_fields[DiscourseSecureNote::NOTE_CUSTOM_FIELD] = secure_note
       post.save_custom_fields(true)
 

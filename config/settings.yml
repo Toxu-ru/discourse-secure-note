@@ -14,3 +14,6 @@ plugins:
   secure_note_topic_owner_only:
     default: false
     client: true
+  secure_note_updated_tag:
+    default: ''
+    client: true
