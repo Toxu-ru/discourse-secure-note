@@ -1,0 +1,19 @@
+ru:
+  js:
+    secure_note:
+      post:
+        title: 'Защищенная заметка'
+        button_title: 'Защищенная заметка'
+      modal:
+        title: 'Защищенная заметка'
+        save_button_title: 'Сохранить заметку'
+        saving_button_title: 'Saving&hellip;'
+        textarea_label: 'Введите примечание ниже. Делая это поле пустым вы удалите примечание.'
+      disclaimer:
+        template: 'Эта информация видна только {{allowed}}'
+        is_op: 'мне и нашим сотрудникам.'
+        is_staff: 'автору постп и сотрудником.'
+        is_staff_and_op: 'мне и другим сотрудникам.'
+        is_op_with_topic_owner: 'мне, сотрудникам и автору поста.'
+        is_staff_with_topic_owner: 'автору поста, автору ответа и сотрудникам.'
+        is_staff_and_op_with_topic_owner: 'мне, хозяину темы и другим сотрудникам.'
